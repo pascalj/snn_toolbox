@@ -1536,6 +1536,7 @@ def get_custom_activations_dict(filepath=None):
 
     from snntoolbox.utils.utils import binary_sigmoid, binary_tanh, \
         ClampedReLU, LimitedReLU, NoisySoftplus
+    import keras_metrics as km
 
     # Todo: We should be able to load a different activation for each layer.
     #       Need to remove this hack:
@@ -1553,6 +1554,8 @@ def get_custom_activations_dict(filepath=None):
         activation_str: activation,
         'Noisy_Softplus': NoisySoftplus,
         'precision': precision,
+        'binary_precision': km.binary_precision(label=0),
+        'binary_recall': km.binary_recall(label=0),
         'activity_regularizer': keras.regularizers.l1}
 
     if filepath is not None and filepath != '':
